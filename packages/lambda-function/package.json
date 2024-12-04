@@ -1,0 +1,21 @@
+{
+  "name": "lambda-function",
+  "version": "1.0.0",
+  "main": "dist/handler.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "start": "sam local start-api"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.111",
+    "eslint": "^8.50.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  },
+  "license": "MIT"
+}
