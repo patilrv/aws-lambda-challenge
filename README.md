@@ -5,8 +5,8 @@ This is a blank project for CDK development with TypeScript.
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 # API Gateway
-Api Gateway URL for accessing AWS lambda function is https://m1zgtm3mx3.execute-api.us-east-1.amazonaws.com/dev
-* `/hello`   Hello/Greeting response endpoint
+Api Gateway URL for accessing AWS lambda function to test APIs : https://m1zgtm3mx3.execute-api.us-east-1.amazonaws.com/dev
+* `/hello?name=Jack`   Hello/Greeting response
 * `/docs`   To get open API documentation
 
 ## Useful commands
