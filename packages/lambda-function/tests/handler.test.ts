@@ -1,4 +1,4 @@
-import { it } from "node:test";
+
 import { handler } from "../src/handler";
 
 describe('handler tests', () => {

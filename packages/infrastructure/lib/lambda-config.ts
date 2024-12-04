@@ -12,15 +12,15 @@ const DEFAULT_LAMBDA_TIMEOUT_MINS = 10;
 // Returns lambda definitions with custom env
 export const getLambdaDefinitions = (context: CDKContext): LambdaDefinition => {
   const lambdaDefinitions: LambdaDefinition = {
-      name: 'public-function',
-      environment: {
-        REGION: context.region,
-        ENV: context.environment,
-        GIT_BRANCH: context.branchName,
-      },
-      isPrivate: false,
-    }
-    
+    name: 'hello-function',
+    environment: {
+      REGION: context.region,
+      ENV: context.environment,
+      GIT_BRANCH: context.branchName,
+    },
+    isPrivate: false,
+  }
+
   return lambdaDefinitions;
 };
 
@@ -41,6 +41,22 @@ export const getFunctionProps = (
     // environment: lambdaDefinition.environment,
     role: lambdaRole,
     layers: [lambdaLayer],
+    bundling: {
+      externalModules: ["aws-sdk"], // Exclude AWS SDK since it's available in Lambda runtime
+      commandHooks: {
+        beforeBundling(inputDir: string, outputDir: string): string[] {
+          const sourcePath = path.posix.join(inputDir, "packages/lambda-function/src/openapi.yaml");
+          const destinationPath = path.posix.join(outputDir, "openapi.yaml");
+          return [`cp ${sourcePath} ${destinationPath}`];
+        },
+        afterBundling(inputDir: string, outputDir: string): string[] {
+          return [];
+        },
+        beforeInstall() {
+          return [];
+        },
+      },
+    }
   };
   return functionProps;
 };

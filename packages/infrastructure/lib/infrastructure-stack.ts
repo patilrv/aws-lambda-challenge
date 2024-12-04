@@ -7,7 +7,7 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as cwLogs from 'aws-cdk-lib/aws-logs';
 import { RemovalPolicy } from 'aws-cdk-lib';
-import * as apigw from "aws-cdk-lib/aws-apigateway";
+import * as apigateway from "aws-cdk-lib/aws-apigateway";
 
 export class LambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, context: CDKContext, props?: cdk.StackProps) {
@@ -69,10 +69,26 @@ export class LambdaStack extends cdk.Stack {
       removalPolicy: RemovalPolicy.DESTROY,
     });
 
-    const endpoint = new apigw.LambdaRestApi(this, `ApiGwEndpoint`, {
-      handler: lambdaFunction,
-      restApiName: `HelloApi`,
+    // const endpoint = new apigateway.LambdaRestApi(this, `ApiGwEndpoint`, {
+    //   handler: lambdaFunction,
+    //   restApiName: `HelloApi`,
+    // });
+
+    // API Gateway
+    const api = new apigateway.RestApi(this, "HelloApi", {
+      restApiName: "Hello API",
+      deployOptions: {
+        stageName: "dev",
+      },
     });
+
+    // Add /hello route
+    const helloResource = api.root.addResource("hello");
+    helloResource.addMethod("GET", new apigateway.LambdaIntegration(lambdaFunction));
+
+    // Add /docs route
+    const docsResource = api.root.addResource("docs");
+    docsResource.addMethod("GET", new apigateway.LambdaIntegration(lambdaFunction));
 
   }
 }
