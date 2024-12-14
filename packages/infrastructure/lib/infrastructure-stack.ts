@@ -19,11 +19,12 @@ export class LambdaStack extends cdk.Stack {
       description: `Lambda role for ${context.appName}`,
       assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
       managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess'),
-      iam.ManagedPolicy.fromManagedPolicyArn(
-        this,
-        'lambdaVPCAccessPolicy',
-        'arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole'
-      ),],
+      // iam.ManagedPolicy.fromManagedPolicyArn(
+      //   this,
+      //   'lambdaVPCAccessPolicy',
+      //   'arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole'
+      // )
+    ],
     });
 
     // Attach inline policies to Lambda role

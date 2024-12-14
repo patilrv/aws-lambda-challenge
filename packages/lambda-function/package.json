@@ -9,10 +9,12 @@
     "start": "sam local start-api"
   },
   "dependencies": {
-    "aws-lambda": "^1.0.7"
+    "aws-lambda": "^1.0.7",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.111",
+    "@jest/transform": "^29.7.0",
     "eslint": "^8.50.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"

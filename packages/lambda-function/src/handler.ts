@@ -1,7 +1,9 @@
+import 'tsconfig-paths/register';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as fs from "fs";
 import * as path from "path";
 import * as utils from '/opt/utils';
+
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { path: requestPath, httpMethod } = event;
